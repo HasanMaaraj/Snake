@@ -1,0 +1,36 @@
+body {
+  display: grid;
+  grid-template-rows: 75px 450px 75px;
+  height: 100vh;
+}
+
+header {
+  background-color: blue;
+}
+
+main {
+  background-color: green;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  grid-gap: 1rem;
+  padding: 25px;
+}
+
+.board {
+  background-color: yellow;
+  height: 400px;
+  width: 400px;
+  justify-self: end;
+}
+
+.display {
+  background-color: orange;
+  min-width: 250px;
+  height: 100%;
+  justify-self: start;
+}
+
+footer {
+  background-color: red;
+}
