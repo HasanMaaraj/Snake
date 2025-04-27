@@ -30,6 +30,11 @@ main {
 .cell {
   border: 1px black solid;
 }
+
+.snake-cell {
+  background-color: brown;
+}
+
 .display {
   background-color: orange;
   min-width: 250px;

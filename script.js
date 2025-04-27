@@ -57,9 +57,15 @@ const clearBoard = () => {
 
 // Write a function that displays the snake
 const displaySnake = () => {
-  snake.locations.forEach(location => {
-    board.querySelector(`[data-key="${location[0]},${location[1]}"]`).classList.add('snake-cell')
-  })
+  for (let i = 0; i < snake.locations.length; i++) {
+    const location = snake.locations[i]
+    const cell = board.querySelector(`[data-location="${location[0]},${location[1]}"]`)
+    cell.classList.add('snake-cell')
+    if (i === snake.locations.length-1)
+    setTimeout(() => {
+      board.querySelector(`[data-location="${location[0]},${location[1]}"]`).classList.remove('snake-cell')
+    }, 1000)
+  }
 }
 // Write a function that updates score
 // write a function that displays lost
@@ -74,6 +80,10 @@ const startGame = () => {
       board.appendChild(cell)
     }
   }
+  setInterval(()=> {
+    snake.move()
+    displaySnake()
+  }, 1000)
 }
 // Write function that resets the length of the snake and score and restarts the game
 
