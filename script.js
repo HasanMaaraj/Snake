@@ -69,6 +69,14 @@ const displaySnake = () => {
 }
 // Write a function that updates score
 // write a function that displays lost
+const checkLost = () => {
+  let snakeHead = snake.locations[0]
+  let snakeHasCollided = false
+  for (let i = 1; i<snake.locations.length; i++) {
+    if (snakeHead[0] === snake.locations[i][0] && snakeHead[1] === snake.locations[i][1]) snakeHasCollided = true
+  }
+  return (snakeHead[0]<1 || snakeHead[0]>50 ||snakeHead[1]<1 || snakeHead[1]>50 || snakeHasCollided) 
+}
 // Write a function that starts game
 const startGame = () => {
   clearBoard()
@@ -80,9 +88,13 @@ const startGame = () => {
       board.appendChild(cell)
     }
   }
-  setInterval(()=> {
+  let moveInterval = setInterval(() => {
     snake.move()
-    displaySnake()
+    if (checkLost()) {
+      clearInterval(moveInterval)
+    } else {
+      displaySnake()
+    }
   }, 1000)
 }
 // Write function that resets the length of the snake and score and restarts the game
