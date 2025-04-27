@@ -90,23 +90,22 @@ const startGame = () => {
 // Event Listeners
 // Enable changing snake direction to by arrow keyboard clicks
 window.addEventListener('keydown', (e) => {
-  console.log(e)
   switch (e.key) {
     case 'ArrowLeft':
       e.preventDefault()
-      snake.direction = 'left'
+      if (snake.direction !== 'right') snake.direction = 'left'
       break
     case 'ArrowUp':
       e.preventDefault()
-      snake.direction = 'up'
+      if (snake.direction !== 'down') snake.direction = 'up'
       break
     case 'ArrowRight':
       e.preventDefault()
-      snake.direction = 'right'
+      if (snake.direction !== 'left') snake.direction = 'right'
       break
     case 'ArrowDown':
       e.preventDefault()
-      snake.direction = 'down'
+      if (snake.direction !== 'up') snake.direction = 'down'
       break
   }
 })
