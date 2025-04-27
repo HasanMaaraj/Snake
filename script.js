@@ -55,6 +55,14 @@ const clearBoard = () => {
   board.innerHTML = ''
 }
 
+// Write a function that displays the snake
+const displaySnake = () => {
+  snake.locations.forEach(location => {
+    board.querySelector(`[data-key="${location[0]},${location[1]}"]`).classList.add('snake-cell')
+  })
+}
+// Write a function that updates score
+// write a function that displays lost
 // Write a function that starts game
 const startGame = () => {
   clearBoard()
@@ -67,13 +75,31 @@ const startGame = () => {
     }
   }
 }
-// Write a function that updates score
-// write a function that displays lost
 // Write function that resets the length of the snake and score and restarts the game
 
 // Event Listeners
-
 // Enable changing snake direction to by arrow keyboard clicks
+window.addEventListener('keydown', (e) => {
+  console.log(e)
+  switch (e.key) {
+    case 'ArrowLeft':
+      e.preventDefault()
+      snake.direction = 'left'
+      break
+    case 'ArrowUp':
+      e.preventDefault()
+      snake.direction = 'up'
+      break
+    case 'ArrowRight':
+      e.preventDefault()
+      snake.direction = 'right'
+      break
+    case 'ArrowDown':
+      e.preventDefault()
+      snake.direction = 'down'
+      break
+  }
+})
 // Display the snake on the board by taking the cells in the snake object and changing the colors of the corresponding cells on the board cells
 // Add restart function event listeners in to the restart button
 // Add event listener to the difficulty button
