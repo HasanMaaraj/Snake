@@ -1,9 +1,8 @@
 // Global Variables
 
 // Select the board
-const boardContainer = document.querySelector('.board-container')
+const board = document.querySelector('.board')
 // Make cell divs
-console.log(boardContainer)
 // Append div cells to the board
 // Select the difficulty buttons
 // Select the restart button
@@ -51,11 +50,14 @@ const snake = {
 // Functions
 
 // Write a function that changes the difficulty variable and the snake speed
+// Write a function that clears the board
+const clearBoard = () => {
+  board.innerHTML = ''
+}
+
 // Write a function that starts game
 const startGame = () => {
-if (boardContainer.firstChild) boardContainer.removeChild(boardContainer.firstChild)
-  const board = document.createElement('div')
-  board.classList.add('board')
+  clearBoard()
   for (let i = 0; i < 50; i++) {
     for (let j = 0; j < 50; j++) {
       const cell = document.createElement('div')
@@ -64,7 +66,6 @@ if (boardContainer.firstChild) boardContainer.removeChild(boardContainer.firstCh
       board.appendChild(cell)
     }
   }
-  boardContainer.appendChild(board)
 }
 // Write a function that updates score
 // write a function that displays lost
