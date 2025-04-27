@@ -17,13 +17,22 @@ main {
   padding: 25px;
 }
 
-.board {
+.board-container {
   background-color: yellow;
   height: 400px;
   width: 400px;
   justify-self: end;
 }
 
+.board {
+  display: grid;
+  grid-template-columns: repeat(50, 1fr);
+  height: 100%;
+}
+
+.cell {
+  border: 1px black solid;
+}
 .display {
   background-color: orange;
   min-width: 250px;
