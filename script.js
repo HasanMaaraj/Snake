@@ -7,6 +7,29 @@ const board = document.querySelector('.board')
 // Select the difficulty buttons
 // Select the restart button
 // Select the score display
+// Make Food object with method changeLocation
+const food = {
+  location: [30, 30],
+  displayLocation() {
+    board
+      .querySelector(
+        `[data-location="${food.location[0]},${food.location[1]}"]`
+      )
+      .classList.add('food-cell')
+  },
+  changeLocation(newLocation) {
+    board
+      .querySelector(
+        `[data-location="${this.location[0]},${this.location[1]}"]`
+      )
+      .classList.remove('food-cell')
+    this.location = newLocation
+    this.displayLocation()
+  },
+  getLocation() {
+    return this.location
+  }
+}
 // Make snake object with attributes (locations: array, direction: string, hasEaten: boolean) and method move
 const snake = {
   locations: [
@@ -19,7 +42,7 @@ const snake = {
     [22, 35],
     [22, 36],
     [22, 37],
-    [22, 38],
+    [22, 38]
   ],
   direction: 'left',
   hasEaten: false,
@@ -27,23 +50,49 @@ const snake = {
     let newLocation
     switch (this.direction) {
       case 'left':
-        newLocation = [this.locations[0][0], this.locations[0][1]-1]
+        newLocation = [this.locations[0][0], this.locations[0][1] - 1]
         break
       case 'up':
-        newLocation = [this.locations[0][0]-1, this.locations[0][1]]
+        newLocation = [this.locations[0][0] - 1, this.locations[0][1]]
         break
       case 'right':
-        newLocation = [this.locations[0][0], this.locations[0][1]+1]
+        newLocation = [this.locations[0][0], this.locations[0][1] + 1]
         break
       case 'down':
-        newLocation = [this.locations[0][0]+1, this.locations[0][1]]
+        newLocation = [this.locations[0][0] + 1, this.locations[0][1]]
         break
     }
     this.locations.unshift(newLocation)
-    this.locations.pop()
+    let foodLocation = food.getLocation()
+    if (
+      !(
+        newLocation[0] === foodLocation[0] && newLocation[1] === foodLocation[1]
+      )
+    ) {
+      this.locations.pop()
+    } else {
+      let newFoodLocation = [
+        Math.ceil(Math.random() * 50),
+        Math.ceil(Math.random() * 50)
+      ]
+      while (
+        this.locations.reduce((acc, location) => {
+          return (
+            acc ||
+            (newFoodLocation[0] == location[0] &&
+              newFoodLocation[1] === location[1])
+          )
+        }, false)
+      ) {
+        newFoodLocation = [
+          Math.ceil(Math.random() * 50),
+          Math.ceil(Math.random() * 50)
+        ]
+      }
+      food.changeLocation(newFoodLocation)
+    }
   }
 }
-// Make Food object with method changeLocation
 // Make string variable for difficulty
 // Make variable for score
 
@@ -59,12 +108,17 @@ const clearBoard = () => {
 const displaySnake = () => {
   for (let i = 0; i < snake.locations.length; i++) {
     const location = snake.locations[i]
-    const cell = board.querySelector(`[data-location="${location[0]},${location[1]}"]`)
+    const cell = board.querySelector(
+      `[data-location="${location[0]},${location[1]}"]`
+    )
     cell.classList.add('snake-cell')
-    if (i === snake.locations.length-1)
-    setTimeout(() => {
-      board.querySelector(`[data-location="${location[0]},${location[1]}"]`).classList.remove('snake-cell')
-    }, 1000)
+    if (i === snake.locations.length - 1) {
+      setTimeout(() => {
+        board
+          .querySelector(`[data-location="${location[0]},${location[1]}"]`)
+          .classList.remove('snake-cell')
+      }, 100)
+    }
   }
 }
 // Write a function that updates score
@@ -72,10 +126,20 @@ const displaySnake = () => {
 const checkLost = () => {
   let snakeHead = snake.locations[0]
   let snakeHasCollided = false
-  for (let i = 1; i<snake.locations.length; i++) {
-    if (snakeHead[0] === snake.locations[i][0] && snakeHead[1] === snake.locations[i][1]) snakeHasCollided = true
+  for (let i = 1; i < snake.locations.length; i++) {
+    if (
+      snakeHead[0] === snake.locations[i][0] &&
+      snakeHead[1] === snake.locations[i][1]
+    )
+      snakeHasCollided = true
   }
-  return (snakeHead[0]<1 || snakeHead[0]>50 ||snakeHead[1]<1 || snakeHead[1]>50 || snakeHasCollided) 
+  return (
+    snakeHead[0] < 1 ||
+    snakeHead[0] > 50 ||
+    snakeHead[1] < 1 ||
+    snakeHead[1] > 50 ||
+    snakeHasCollided
+  )
 }
 // Write a function that starts game
 const startGame = () => {
@@ -84,10 +148,11 @@ const startGame = () => {
     for (let j = 0; j < 50; j++) {
       const cell = document.createElement('div')
       cell.classList.add('cell')
-      cell.dataset.location = `${i+1},${j+1}`
+      cell.dataset.location = `${i + 1},${j + 1}`
       board.appendChild(cell)
     }
   }
+  food.displayLocation()
   let moveInterval = setInterval(() => {
     snake.move()
     if (checkLost()) {
@@ -95,7 +160,7 @@ const startGame = () => {
     } else {
       displaySnake()
     }
-  }, 1000)
+  }, 100)
 }
 // Write function that resets the length of the snake and score and restarts the game
 

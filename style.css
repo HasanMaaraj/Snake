@@ -35,6 +35,10 @@ main {
   background-color: brown;
 }
 
+.food-cell {
+  background-color: blue;
+}
+
 .display {
   background-color: orange;
   min-width: 250px;
