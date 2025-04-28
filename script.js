@@ -170,19 +170,23 @@ window.addEventListener('keydown', (e) => {
   switch (e.key) {
     case 'ArrowLeft':
       e.preventDefault()
-      if (snake.direction !== 'right') snake.direction = 'left'
+      if (snake.locations[0][0] !== snake.locations[1][0])
+        snake.direction = 'left'
       break
     case 'ArrowUp':
       e.preventDefault()
-      if (snake.direction !== 'down') snake.direction = 'up'
+      if (snake.locations[0][1] !== snake.locations[1][1])
+        snake.direction = 'up'
       break
     case 'ArrowRight':
       e.preventDefault()
-      if (snake.direction !== 'left') snake.direction = 'right'
+      if (snake.locations[0][0] !== snake.locations[1][0])
+        snake.direction = 'right'
       break
     case 'ArrowDown':
       e.preventDefault()
-      if (snake.direction !== 'up') snake.direction = 'down'
+      if (snake.locations[0][1] !== snake.locations[1][1])
+        snake.direction = 'down'
       break
   }
 })
