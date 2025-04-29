@@ -155,7 +155,7 @@ const game = {
     )
   },
   startGame() {
-    clearBoard()
+    this.clearBoard()
     for (let i = 0; i < 50; i++) {
       for (let j = 0; j < 50; j++) {
         const cell = document.createElement('div')
@@ -178,8 +178,7 @@ const game = {
         displaySnake()
       }
     }, 100)
-  },
-  restartGame() {}
+  }
 }
 // Write function that resets the length of the snake and score and restarts the game
 
