@@ -4,12 +4,15 @@ body {
   height: 100vh;
 }
 
-header {
-  background-color: blue;
+header,
+footer,
+button,
+.snake-cell {
+  background-color: #fa9923;
 }
 
 main {
-  background-color: green;
+  background-color: #015858;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -18,34 +21,26 @@ main {
 }
 
 .board {
-  background-color: yellow;
+  background-color: white;
   height: 400px;
   width: 400px;
   justify-self: end;
   display: grid;
   grid-template-columns: repeat(50, 1fr);
   height: 100%;
-  }
-
+}
+/* 
 .cell {
   border: 1px black solid;
-}
+} */
 
-.snake-cell {
-  background-color: brown;
-}
-
-.food-cell {
-  background-color: blue;
+.food-cell,
+.display {
+  background-color: #2370fa;
 }
 
 .display {
-  background-color: orange;
   min-width: 250px;
   height: 100%;
   justify-self: start;
-}
-
-footer {
-  background-color: red;
 }
