@@ -2,18 +2,18 @@
 
 // Select the board
 const board = document.querySelector('.board')
-// Make cell divs
-// Append div cells to the board
 // Select the difficulty buttons
 const easyBtn = document.querySelector('.easy-btn')
 const mediumBtn = document.querySelector('.medium-btn')
 const hardBtn = document.querySelector('.hard-btn')
+// Make string variable for difficulty
 let difficulty = 'easy'
 let speed = 100
 // Select the restart button
 const restartBtn = document.querySelector('.restart-btn')
 // Select the score display
 const scoreDisplay = document.querySelector('.score-display')
+// Make variable for score
 let score = 0
 // Make Food object with method changeLocation
 const food = {
@@ -102,13 +102,8 @@ const snake = {
     }
   }
 }
-// Make string variable for difficulty
-// Make variable for score
 
 // Functions
-
-// Write a function that changes the difficulty variable and the snake speed
-// Write a function that clears the board
 
 // Write a function that displays the snake
 const displaySnake = () => {
@@ -127,17 +122,19 @@ const displaySnake = () => {
     }
   }
 }
-// Write a function that updates score
 
 // Write a function that starts
 const game = {
   moveInterval: null,
+  // Write a function that clears the board
   clearBoard() {
     board.innerHTML = ''
   },
+  // Write a function that updates score
   updateScore() {
     scoreDisplay.innerText = `Score: ${score}`
   },
+  // Write a function that checks whether the player lost or not
   checkLost() {
     let snakeHead = snake.locations[0]
     let snakeHasCollided = false
@@ -159,11 +156,13 @@ const game = {
   startGame() {
     this.clearBoard()
     this.updateScore()
+    // Make cell divs
     for (let i = 0; i < 50; i++) {
       for (let j = 0; j < 50; j++) {
         const cell = document.createElement('div')
         cell.classList.add('cell')
         cell.dataset.location = `${i + 1},${j + 1}`
+        // Append div cells to the board
         board.appendChild(cell)
       }
     }
@@ -184,6 +183,7 @@ const game = {
     }, speed)
   }
 }
+// Write function that resets the length of the snake and score and restarts the game
 const restartGame = () => {
   score = 0
   food.location = [30, 30]
@@ -202,7 +202,6 @@ const restartGame = () => {
   clearInterval(game.moveInterval)
   game.startGame()
 }
-// Write function that resets the length of the snake and score and restarts the game
 
 // Event Listeners
 // Enable changing snake direction to by arrow keyboard clicks
@@ -231,7 +230,9 @@ window.addEventListener('keydown', (e) => {
   }
 })
 game.startGame()
+// Add restart function event listeners in to the restart button
 restartBtn.addEventListener('click', restartGame)
+// Add event listener to the difficulty buttons
 easyBtn.addEventListener('click', () => {
   difficulty = 'Easy'
   speed = 100
@@ -244,7 +245,3 @@ hardBtn.addEventListener('click', () => {
   difficulty = 'Hard'
   speed = 40
 })
-// Display the snake on the board by taking the cells in the snake object and changing the colors of the corresponding cells on the board cells
-// Add restart function event listeners in to the restart button
-// Add event listener to the difficulty button
-// Add event listener that displays lost win snake hits the wall or itself
