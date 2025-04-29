@@ -16,6 +16,13 @@ button,
   background-color: #fa9923;
 }
 
+header,
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 main {
   background-color: #015858;
   display: grid;
