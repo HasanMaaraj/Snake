@@ -5,8 +5,16 @@ const board = document.querySelector('.board')
 // Make cell divs
 // Append div cells to the board
 // Select the difficulty buttons
+const easyBtn = document.querySelector('.easy-btn')
+const mediumBtn = document.querySelector('.medium-btn')
+const hardBtn = document.querySelector('.hard-btn')
+let difficulty = 'easy'
 // Select the restart button
+const restartBtn = document.querySelector('.restart-btn')
 // Select the score display
+const scoreDisplay = document.querySelector('.score-display')
+let score = 0
+console.log(easyBtn, mediumBtn, hardBtn, restartBtn, scoreDisplay)
 // Make Food object with method changeLocation
 const food = {
   location: [30, 30],
