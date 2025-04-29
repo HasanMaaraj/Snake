@@ -14,7 +14,6 @@ const restartBtn = document.querySelector('.restart-btn')
 // Select the score display
 const scoreDisplay = document.querySelector('.score-display')
 let score = 0
-console.log(easyBtn, mediumBtn, hardBtn, restartBtn, scoreDisplay)
 // Make Food object with method changeLocation
 const food = {
   location: [30, 30],
@@ -79,6 +78,7 @@ const snake = {
     ) {
       this.locations.pop()
     } else {
+      this.hasEaten = true
       let newFoodLocation = [
         Math.ceil(Math.random() * 50),
         Math.ceil(Math.random() * 50)
@@ -130,6 +130,10 @@ const displaySnake = () => {
   }
 }
 // Write a function that updates score
+const updateScore = () => {
+  score++
+  scoreDisplay.innerText = `Score:${score}`
+}
 // write a function that displays lost
 const checkLost = () => {
   let snakeHead = snake.locations[0]
@@ -163,6 +167,10 @@ const startGame = () => {
   food.displayLocation()
   let moveInterval = setInterval(() => {
     snake.move()
+    if (snake.hasEaten) {
+      updateScore()
+      snake.hasEaten = false
+    }
     if (checkLost()) {
       clearInterval(moveInterval)
     } else {
