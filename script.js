@@ -130,6 +130,7 @@ const displaySnake = () => {
 
 // Write a function that starts
 const game = {
+  moveInterval: null,
   clearBoard() {
     board.innerHTML = ''
   },
@@ -156,6 +157,7 @@ const game = {
   },
   startGame() {
     this.clearBoard()
+    this.updateScore()
     for (let i = 0; i < 50; i++) {
       for (let j = 0; j < 50; j++) {
         const cell = document.createElement('div')
@@ -165,7 +167,7 @@ const game = {
       }
     }
     food.displayLocation()
-    let moveInterval = setInterval(() => {
+    this.moveInterval = setInterval(() => {
       snake.move()
       if (snake.hasEaten) {
         score++
@@ -173,12 +175,30 @@ const game = {
         snake.hasEaten = false
       }
       if (this.checkLost()) {
-        clearInterval(moveInterval)
+        clearInterval(this.moveInterval)
       } else {
         displaySnake()
       }
     }, 100)
   }
+}
+const restartGame = () => {
+  score = 0
+  food.location = [30, 30]
+  snake.locations = [
+    [22, 29],
+    [22, 30],
+    [22, 31],
+    [22, 32],
+    [22, 33],
+    [22, 34],
+    [22, 35],
+    [22, 36],
+    [22, 37],
+    [22, 38]
+  ]
+  clearInterval(game.moveInterval)
+  game.startGame()
 }
 // Write function that resets the length of the snake and score and restarts the game
 
@@ -209,6 +229,7 @@ window.addEventListener('keydown', (e) => {
   }
 })
 game.startGame()
+restartBtn.addEventListener('click', restartGame)
 // Display the snake on the board by taking the cells in the snake object and changing the colors of the corresponding cells on the board cells
 // Add restart function event listeners in to the restart button
 // Add event listener to the difficulty button
