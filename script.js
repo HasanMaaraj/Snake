@@ -9,6 +9,7 @@ const easyBtn = document.querySelector('.easy-btn')
 const mediumBtn = document.querySelector('.medium-btn')
 const hardBtn = document.querySelector('.hard-btn')
 let difficulty = 'easy'
+let speed = 100
 // Select the restart button
 const restartBtn = document.querySelector('.restart-btn')
 // Select the score display
@@ -179,7 +180,7 @@ const game = {
       } else {
         displaySnake()
       }
-    }, 100)
+    }, speed)
   }
 }
 const restartGame = () => {
@@ -230,6 +231,18 @@ window.addEventListener('keydown', (e) => {
 })
 game.startGame()
 restartBtn.addEventListener('click', restartGame)
+easyBtn.addEventListener('click', () => {
+  difficulty = 'Easy'
+  speed = 100
+})
+mediumBtn.addEventListener('click', () => {
+  difficulty = 'Medium'
+  speed = 80
+})
+hardBtn.addEventListener('click', () => {
+  difficulty = 'Hard'
+  speed = 40
+})
 // Display the snake on the board by taking the cells in the snake object and changing the colors of the corresponding cells on the board cells
 // Add restart function event listeners in to the restart button
 // Add event listener to the difficulty button
