@@ -130,53 +130,55 @@ const displaySnake = () => {
   }
 }
 // Write a function that updates score
-const updateScore = () => {
-  score++
-  scoreDisplay.innerText = `Score:${score}`
-}
-// write a function that displays lost
-const checkLost = () => {
-  let snakeHead = snake.locations[0]
-  let snakeHasCollided = false
-  for (let i = 1; i < snake.locations.length; i++) {
-    if (
-      snakeHead[0] === snake.locations[i][0] &&
-      snakeHead[1] === snake.locations[i][1]
+
+// Write a function that starts
+const game = {
+  updateScore() {
+    scoreDisplay.innerText = `Score: ${score}`
+  },
+  checkLost() {
+    let snakeHead = snake.locations[0]
+    let snakeHasCollided = false
+    for (let i = 1; i < snake.locations.length; i++) {
+      if (
+        snakeHead[0] === snake.locations[i][0] &&
+        snakeHead[1] === snake.locations[i][1]
+      )
+        snakeHasCollided = true
+    }
+    return (
+      snakeHead[0] < 1 ||
+      snakeHead[0] > 50 ||
+      snakeHead[1] < 1 ||
+      snakeHead[1] > 50 ||
+      snakeHasCollided
     )
-      snakeHasCollided = true
+  },
+  startGame() {
+    clearBoard()
+    for (let i = 0; i < 50; i++) {
+      for (let j = 0; j < 50; j++) {
+        const cell = document.createElement('div')
+        cell.classList.add('cell')
+        cell.dataset.location = `${i + 1},${j + 1}`
+        board.appendChild(cell)
+      }
+    }
+    food.displayLocation()
+    let moveInterval = setInterval(() => {
+      snake.move()
+      if (snake.hasEaten) {
+        score++
+        this.updateScore()
+        snake.hasEaten = false
+      }
+      if (this.checkLost()) {
+        clearInterval(moveInterval)
+      } else {
+        displaySnake()
+      }
+    }, 100)
   }
-  return (
-    snakeHead[0] < 1 ||
-    snakeHead[0] > 50 ||
-    snakeHead[1] < 1 ||
-    snakeHead[1] > 50 ||
-    snakeHasCollided
-  )
-}
-// Write a function that starts game
-const startGame = () => {
-  clearBoard()
-  for (let i = 0; i < 50; i++) {
-    for (let j = 0; j < 50; j++) {
-      const cell = document.createElement('div')
-      cell.classList.add('cell')
-      cell.dataset.location = `${i + 1},${j + 1}`
-      board.appendChild(cell)
-    }
-  }
-  food.displayLocation()
-  let moveInterval = setInterval(() => {
-    snake.move()
-    if (snake.hasEaten) {
-      updateScore()
-      snake.hasEaten = false
-    }
-    if (checkLost()) {
-      clearInterval(moveInterval)
-    } else {
-      displaySnake()
-    }
-  }, 100)
 }
 // Write function that resets the length of the snake and score and restarts the game
 
@@ -206,9 +208,8 @@ window.addEventListener('keydown', (e) => {
       break
   }
 })
+game.startGame()
 // Display the snake on the board by taking the cells in the snake object and changing the colors of the corresponding cells on the board cells
 // Add restart function event listeners in to the restart button
 // Add event listener to the difficulty button
 // Add event listener that displays lost win snake hits the wall or itself
-
-startGame()
