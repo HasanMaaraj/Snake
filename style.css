@@ -42,6 +42,17 @@ main {
   height: 100%;
 }
 
+.loose-screen {
+  color: black;
+  width: 400px;
+  height: 400px;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .food-cell,
 .display {
   background-color: #2370fa;

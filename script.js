@@ -177,6 +177,7 @@ const game = {
       }
       if (this.checkLost()) {
         clearInterval(this.moveInterval)
+        board.innerHTML = '<div class="loose-screen">You Lost!</div>'
       } else {
         displaySnake()
       }
