@@ -34,10 +34,6 @@ main {
   grid-template-columns: repeat(50, 1fr);
   height: 100%;
 }
-/* 
-.cell {
-  border: 1px black solid;
-} */
 
 .food-cell,
 .display {
@@ -48,4 +44,17 @@ main {
   min-width: 250px;
   height: 100%;
   justify-self: start;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-display {
+  text-align: center;
+}
+
+button {
+  padding: 4px;
+  border: 1px black solid;
+  border-radius: 5px;
 }
