@@ -3,6 +3,11 @@ body {
   grid-template-rows: 75px 450px 75px;
   height: 100vh;
 }
+body,
+button {
+  font-family: cursive;
+  color: white;
+}
 
 header,
 footer,
