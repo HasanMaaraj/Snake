@@ -108,9 +108,6 @@ const snake = {
 
 // Write a function that changes the difficulty variable and the snake speed
 // Write a function that clears the board
-const clearBoard = () => {
-  board.innerHTML = ''
-}
 
 // Write a function that displays the snake
 const displaySnake = () => {
@@ -133,6 +130,9 @@ const displaySnake = () => {
 
 // Write a function that starts
 const game = {
+  clearBoard() {
+    board.innerHTML = ''
+  },
   updateScore() {
     scoreDisplay.innerText = `Score: ${score}`
   },
@@ -178,7 +178,8 @@ const game = {
         displaySnake()
       }
     }, 100)
-  }
+  },
+  restartGame() {}
 }
 // Write function that resets the length of the snake and score and restarts the game
 
