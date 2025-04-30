@@ -199,6 +199,7 @@ const restartGame = () => {
     [22, 37],
     [22, 38]
   ]
+  snake.direction = 'left'
   clearInterval(game.moveInterval)
   game.startGame()
 }
